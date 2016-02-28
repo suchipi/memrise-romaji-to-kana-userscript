@@ -22,7 +22,9 @@
 
   // A word is valid kana if it doesn't contain any roman characters
   var isValidKanaWord = function(word) {
-    return !!word.match(/[^a-zA-Z]/);
+    var allowedNonKanaCharacterRegex = /\?|\.|:|\[|\]|\(|\)|\||;|-|\+|\!|\d|'|"|\\|\/|<|>|\$|@|#|,|_|%|\^|&|\*|\s/g;
+    var normalizedWord = word.trim().replace(allowedNonKanaCharacterRegex, '');
+    return wanakana.isKana(normalizedWord);
   };
 
   // Try to convert a word to kana. If the output contains roman letters, the input was probably
