@@ -16,15 +16,20 @@
 
 (function(){
   // A word is english if it's in our list of english wiords
-  var isEnglishWord = function(word){
+  var isEnglishWord = function(word) {
     return WordListObject[word.trim().toLowerCase()];
   };
 
-  // Try to convert a word to kana. If the output isn't 100% kana, the input was probably
+  // A word is valid kana if it doesn't contain any roman characters
+  var isValidKanaWord = function(word) {
+    return !!word.match(/[^a-zA-Z]/);
+  };
+
+  // Try to convert a word to kana. If the output contains roman letters, the input was probably
   // not romanized japanese text, so return the original word instead of the mixed kana string.
   var convertToKana = function(word){
     var tryWord = wanakana.toKana(word);
-    if (wanakana.isKana(tryWord.trim())) {
+    if (isValidKanaWord(tryWord)) {
       return tryWord;
     } else {
       return word;
@@ -60,7 +65,7 @@
     // If the element doesn't have a title...
     } else {
       // Just set it to what the text was before conversion
-      newTitle = oldText.trim();
+      newTitle = titleText;
     }
 
     if (newTitle) element.setAttribute("title", newTitle);
