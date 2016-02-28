@@ -15,16 +15,19 @@
 // suchipi/word-list provides the WordListObject global
 
 (function(){
+  var normalizeWord = function(word) {
+    var charactersToRemoveRegex = /\?|\.|:|\[|\]|\(|\)|\||;|-|\+|\!|\d|'|"|\\|\/|<|>|\$|@|#|,|_|%|\^|&|\*|\s/g;
+    return word.trim().replace(charactersToRemoveRegex, '').toLowerCase();
+  };
+
   // A word is english if it's in our list of english wiords
   var isEnglishWord = function(word) {
-    return WordListObject[word.trim().toLowerCase()];
+    return WordListObject[normalizeWord(word)];
   };
 
   // A word is valid kana if it doesn't contain any roman characters
   var isValidKanaWord = function(word) {
-    var allowedNonKanaCharacterRegex = /\?|\.|:|\[|\]|\(|\)|\||;|-|\+|\!|\d|'|"|\\|\/|<|>|\$|@|#|,|_|%|\^|&|\*|\s/g;
-    var normalizedWord = word.trim().replace(allowedNonKanaCharacterRegex, '');
-    return wanakana.isKana(normalizedWord);
+    return wanakana.isKana(normalizeWord(word));
   };
 
   // Try to convert a word to kana. If the output contains roman letters, the input was probably
