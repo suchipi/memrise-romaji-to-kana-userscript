@@ -2,9 +2,9 @@
 // @name         Memrise Romaji -> Kana
 // @namespace    http://suchipi.com/
 // @version      0.1
-// @description  Tries to autodetect Japanese romaji words on Memrise.com and render them using kana instead
+// @description  Tries to autodetect Japanese romaji words and render them using kana instead
 // @author       Suchipi
-// @match        http://*.memrise.com/*
+// @match        http://localhost*
 // @grant        none
 // @require      https://cdn.rawgit.com/WaniKani/WanaKana/master/lib/wanakana.js
 // @require      https://cdn.rawgit.com/suchipi/word-list/master/dist/object.js
